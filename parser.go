@@ -135,7 +135,9 @@ func (p *Parser) ParseArgs(args []string) ([]string, error) {
 
 	// Add builtin help group to all commands if necessary
 	if (p.Options & HelpFlag) != None {
-		p.addHelpGroups(p.showBuiltinHelp)
+		p.addHelpGroups(func() error {
+			return p.showBuiltinHelp()
+		})
 	}
 
 	s := &parseState{

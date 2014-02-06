@@ -85,6 +85,8 @@ func (option *Option) isBool() bool {
 			return false
 		}
 	}
+
+	return false // unreachable
 }
 
 func (option *Option) isFunc() bool {

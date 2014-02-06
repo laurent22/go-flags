@@ -251,7 +251,9 @@ func (g *Group) scanType(handler scanHandler) error {
 }
 
 func (g *Group) scan() error {
-	return g.scanType(g.scanSubGroupHandler)
+	return g.scanType(func(realval reflect.Value, sfield *reflect.StructField) (bool, error) {
+		return g.scanSubGroupHandler(realval, sfield)
+	})
 }
 
 func (g *Group) groupByName(name string) *Group {
